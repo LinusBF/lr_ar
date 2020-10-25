@@ -1,8 +1,6 @@
 name: lr_ar
 description: An Augmented Reality app made for long range use cases where plane detection isn't needed
-
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-
 version: 1.0.0+1
 
 environment:
@@ -12,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.0
+  camera: ^0.5.8+7
 
 dev_dependencies:
   flutter_test:
