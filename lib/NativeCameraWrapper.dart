@@ -11,8 +11,8 @@ class NativeCameraWrapper {
       final String result = await platform.invokeMethod('getCameraFOV', {"cameraId": cameraId});
       print('Got $result back from camera FOV query scanning');
       Map<String, dynamic> parsedResult = jsonDecode(result);
-      fovAngle.angleX = parsedResult['x'];
-      fovAngle.angleY = parsedResult['y'];
+      fovAngle.angleX = parsedResult['x'].toDouble(); 
+      fovAngle.angleY = parsedResult['y'].toDouble();
     } on PlatformException catch (e) {
       print('NFC native function scanNFCChip failed with message: ${e.message}');
     }
