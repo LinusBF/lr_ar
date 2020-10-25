@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:lr_ar/ARView.dart';
 import 'package:lr_ar/NativeCameraWrapper.dart';
+import 'package:lr_ar/utils.dart';
 
 void main() {
   runApp(MyApp());
@@ -52,7 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Stack(children: [
         Align(
           alignment: Alignment.topCenter,
-          child: _angles == null ? Text('Loading FOV information') : Text('${_angles.angleX}, ${_angles.angleY}'),
+          child: _angles == null
+              ? Text('Loading FOV information')
+              : Text('${_angles.angleX}, ${_angles.angleY}\n${radToDeg(_angles.angleX)}, ${radToDeg(_angles.angleY)}'),
         ),
         Align(
           alignment: Alignment.bottomCenter,
