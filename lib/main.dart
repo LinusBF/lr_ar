@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/cupertino.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:lr_ar/ARView.dart';
 import 'package:lr_ar/NativeCameraWrapper.dart';
 import 'package:lr_ar/utils.dart';
@@ -31,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   FOVAngles _angles;
+  Position _currentPosition;
 
   @override
   void initState() {
@@ -40,6 +42,19 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         _angles = value;
       });
+    });
+    Geolocator.checkPermission()
+      .then((LocationPermission permission) {
+        if(permission == LocationPermission.always || permission == LocationPermission.whileInUse){
+          return Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+        } else {
+          Geolocator.requestPermission().then((_) => Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high));
+        }
+      })
+      .then((position) {
+        setState(() {
+          _currentPosition = position;
+        });
     });
   }
 
@@ -56,6 +71,12 @@ class _MyHomePageState extends State<MyHomePage> {
           child: _angles == null
               ? Text('Loading FOV information')
               : Text('${_angles.angleX}, ${_angles.angleY}\n${radToDeg(_angles.angleX)}, ${radToDeg(_angles.angleY)}'),
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: _currentPosition == null
+              ? Text('Loading position information')
+              : Text('${_currentPosition.latitude}, ${_currentPosition.longitude}, ${_currentPosition.heading}, ${_currentPosition.altitude}'),
         ),
         Align(
           alignment: Alignment.bottomCenter,
