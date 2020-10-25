@@ -44,7 +44,18 @@ class MainActivity: FlutterActivity() {
         val activeArray = cameraDetails.get(CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE)!!
         val pixelArray = cameraDetails.get(CameraCharacteristics.SENSOR_INFO_PIXEL_ARRAY_SIZE)!!
         val focalLength = cameraDetails.get(CameraCharacteristics.SENSOR_INFO_PHYSICAL_SIZE)!!
+        println("Camera Info:")
+        print("physicalSize: ")
+        println(physicalSize.toString())
+        print("activeArray: ")
+        println(activeArray.toString())
+        print("pixelArray: ")
+        println(pixelArray.toString())
+        print("focalLength: ")
+        println(focalLength.toString())
         val outputWidth = physicalSize.width * activeArray.width() / pixelArray.width
+        print("outputWidth: ")
+        println(outputWidth.toString())
         return 2 * atan(outputWidth / (2 * focalLength.width))
     }
 
