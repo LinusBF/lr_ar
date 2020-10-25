@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:flutter_compass/flutter_compass.dart';
 import 'package:geolocator/geolocator.dart';
 
 double radToDeg(double rad) {
@@ -32,3 +33,8 @@ Future<Stream<Position>> getPosStream() {
     }
   });
 }
+
+Stream<CompassEvent> getHeadingStream() {
+  return FlutterCompass.events;
+}
+

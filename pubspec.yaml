@@ -12,6 +12,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   camera: ^0.5.8+7
   geolocator: ^6.1.1
+  flutter_compass: ^0.5.0
 
 dev_dependencies:
   flutter_test:
